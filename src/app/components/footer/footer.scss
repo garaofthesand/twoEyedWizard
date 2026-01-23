@@ -1,0 +1,104 @@
+// Footer Styles
+$primary-dark: #000000;
+$secondary-color: #ffffff;
+$text-light: #ffffff;
+$border-color: #222;
+
+.footer {
+  background: #000000;
+  border-top: 1px solid $border-color;
+  padding: 4rem 2rem 2rem;
+  margin-top: 4rem;
+
+  .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 3rem;
+    margin-bottom: 3rem;
+
+    .footer-section {
+      h3 {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: $text-light;
+        margin-bottom: 1.5rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        li {
+          margin-bottom: 0.8rem;
+
+          a {
+            color: rgba($text-light, 0.7);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+
+            &:hover {
+              color: $secondary-color;
+              margin-left: 5px;
+            }
+          }
+        }
+      }
+
+      p {
+        color: rgba($text-light, 0.7);
+        line-height: 1.6;
+        font-size: 0.95rem;
+      }
+
+      .social-links {
+        display: flex;
+        gap: 1.5rem;
+
+        .social-link {
+          width: 45px;
+          height: 45px;
+          border-radius: 50%;
+          background: rgba($secondary-color, 0.1);
+          border: 2px solid $secondary-color;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: $secondary-color;
+          text-decoration: none;
+          font-size: 1.2rem;
+          transition: all 0.3s ease;
+
+          &:hover {
+            background: $secondary-color;
+            color: #0a0a0a;
+            transform: translateY(-3px);
+          }
+        }
+      }
+    }
+  }
+
+  .footer-bottom {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid $border-color;
+    color: rgba($text-light, 0.5);
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer {
+    padding: 2rem 1rem;
+
+    .footer-container {
+      gap: 2rem;
+    }
+  }
+}

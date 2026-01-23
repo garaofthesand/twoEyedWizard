@@ -1,0 +1,167 @@
+// Music Component Styles
+$primary-color: #000000;
+$secondary-color: #ffffff;
+$dark-bg: #000000;
+$text-light: #ffffff;
+$text-muted: rgba(255, 255, 255, 0.7);
+
+.music-container {
+  min-height: 100vh;
+  background: #000000;
+  padding: 4rem 2rem;
+
+  .music-header {
+    max-width: 1200px;
+    margin: 0 auto 4rem;
+    text-align: center;
+
+    h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      color: $text-light;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    p {
+      font-size: 1.2rem;
+      color: $text-muted;
+    }
+  }
+
+  .albums-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 2rem;
+
+    .album-item {
+      transition: all 0.3s ease;
+      cursor: pointer;
+
+      &:hover {
+        transform: translateY(-10px);
+
+        .album-cover {
+          box-shadow: 0 15px 40px rgba(0, 102, 255, 0.3);
+        }
+      }
+
+      .album-cover {
+        position: relative;
+        border-radius: 10px;
+        overflow: hidden;
+        margin-bottom: 1rem;
+        aspect-ratio: 1;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        transition: box-shadow 0.3s ease;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: transform 0.3s ease;
+        }
+
+        .album-hover {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: rgba(0, 0, 0, 0.7);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          opacity: 0;
+          transition: opacity 0.3s ease;
+
+          .play-button {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: $primary-color;
+            border: none;
+            color: $text-light;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+
+            &:hover {
+              background: $secondary-color;
+              transform: scale(1.1);
+              color: $dark-bg;
+            }
+          }
+        }
+
+        &:hover {
+          .album-hover {
+            opacity: 1;
+          }
+          img {
+            transform: scale(1.05);
+          }
+        }
+      }
+
+      .album-info {
+        h3 {
+          font-size: 1.1rem;
+          color: $text-light;
+          margin: 0 0 0.5rem 0;
+          font-weight: 600;
+          line-height: 1.3;
+        }
+
+        .artist {
+          color: $text-muted;
+          font-size: 0.9rem;
+          margin-bottom: 0.75rem;
+        }
+
+        .album-meta {
+          display: flex;
+          gap: 1rem;
+          margin-bottom: 0.5rem;
+
+          span {
+            font-size: 0.85rem;
+            color: $primary-color;
+            font-weight: 600;
+          }
+        }
+
+        .streams {
+          font-size: 0.9rem;
+          color: $secondary-color;
+          font-weight: 600;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .music-container {
+    padding: 2rem 1rem;
+
+    .music-header {
+      h1 {
+        font-size: 2rem;
+      }
+
+      p {
+        font-size: 1rem;
+      }
+    }
+
+    .albums-grid {
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 1.5rem;
+    }
+  }
+}

@@ -1,0 +1,23 @@
+<div class="appearances-container">
+  <div class="appearances-header">
+    <h1>Appearances & Events</h1>
+    <p>Schedule of upcoming performances and appearances</p>
+  </div>
+
+  <div class="events-list">
+    <div *ngFor="let appearance of appearances" class="event-card">
+      <div class="event-image">
+        <img [src]="appearance.image" [alt]="appearance.event" />
+        <span class="status-badge" [class]="appearance.status.toLowerCase()">{{ appearance.status }}</span>
+      </div>
+      <div class="event-details">
+        <h3>{{ appearance.event }}</h3>
+        <div class="event-info">
+          <p class="date">📅 {{ appearance.date }}</p>
+          <p class="location">📍 {{ appearance.location }}</p>
+        </div>
+        <button class="btn-get-tickets">Get Tickets</button>
+      </div>
+    </div>
+  </div>
+</div>

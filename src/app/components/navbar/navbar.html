@@ -1,0 +1,40 @@
+<nav class="navbar">
+  <div class="navbar-container">
+    <div class="navbar-brand">
+      <a routerLink="/" class="logo">
+        <img src="logo.jpg" alt="Artist Logo" class="logo-img" />
+      </a>
+    </div>
+
+    <button class="menu-toggle" (click)="toggleMenu()" [class.active]="menuOpen">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <div class="nav-menu" [class.active]="menuOpen">
+      <ul class="nav-list">
+        <li *ngFor="let link of navLinks" class="nav-item">
+          <a 
+            [routerLink]="link.path" 
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            class="nav-link"
+            (click)="closeMenu()">
+            {{ link.label }}
+          </a>
+        </li>
+      </ul>
+      
+      <div class="social-icons">
+        <a *ngFor="let social of socialLinks" 
+           [href]="social.url" 
+           target="_blank" 
+           rel="noopener"
+           class="social-link">
+          <i [class]="'fab fa-' + social.icon"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>

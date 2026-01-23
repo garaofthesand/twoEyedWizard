@@ -1,0 +1,26 @@
+<div class="music-container">
+  <div class="music-header">
+    <h1>Music & Albums</h1>
+    <p>Explore the complete catalog of albums and music</p>
+  </div>
+
+  <div class="albums-grid">
+    <div *ngFor="let album of albums" class="album-item">
+      <div class="album-cover">
+        <img [src]="album.image" [alt]="album.title" />
+        <div class="album-hover">
+          <button class="play-button">▶ Play</button>
+        </div>
+      </div>
+      <div class="album-info">
+        <h3>{{ album.title }}</h3>
+        <p class="artist">{{ album.artist }}</p>
+        <div class="album-meta">
+          <span class="year">{{ album.year }}</span>
+          <span class="tracks">{{ album.tracks }} Tracks</span>
+        </div>
+        <p class="streams">{{ album.streams }} Streams</p>
+      </div>
+    </div>
+  </div>
+</div>
