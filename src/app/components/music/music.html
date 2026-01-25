@@ -1,26 +1,39 @@
-<div class="music-container">
-  <div class="music-header">
-    <h1>Music & Albums</h1>
-    <p>Explore the complete catalog of albums and music</p>
-  </div>
+<div class="music-page">
+	<div class="container">
+		<!-- Optional header image: set `headerImage` in the component to show -->
+		<div class="top-image" *ngIf="headerImage">
+			<img [src]="headerImage" alt="header" />
+		</div>
+		<div class="music-grid">
+			<div class="left-column">
+				<div class="album-art">
+					<button class="arrow prev" (click)="prevAlbum()">&#10094;</button>
 
-  <div class="albums-grid">
-    <div *ngFor="let album of albums" class="album-item">
-      <div class="album-cover">
-        <img [src]="album.image" [alt]="album.title" />
-        <div class="album-hover">
-          <button class="play-button">▶ Play</button>
-        </div>
-      </div>
-      <div class="album-info">
-        <h3>{{ album.title }}</h3>
-        <p class="artist">{{ album.artist }}</p>
-        <div class="album-meta">
-          <span class="year">{{ album.year }}</span>
-          <span class="tracks">{{ album.tracks }} Tracks</span>
-        </div>
-        <p class="streams">{{ album.streams }} Streams</p>
-      </div>
-    </div>
-  </div>
+					<div class="art-frame">
+						<img [src]="albums[currentAlbum].image" [alt]="albums[currentAlbum].title" />
+					</div>
+
+					<button class="arrow next" (click)="nextAlbum()">&#10095;</button>
+
+					<div class="dots">
+						<span *ngFor="let a of albums; let i = index" (click)="selectAlbum(i)" [class.active]="i === currentAlbum"></span>
+					</div>
+				</div>
+			</div>
+
+			<div class="right-column">
+				<div class="tracks-list">
+					<h2 class="album-title">{{ albums[currentAlbum].title }}</h2>
+					<div *ngFor="let t of albums[currentAlbum].tracks" class="track-item">
+						<div class="track-info">
+							<h3 class="track-title">{{ t.title }}</h3>
+						</div>
+						<div class="track-action">
+							<a [href]="t.spotify" target="_blank" rel="noopener" class="btn-listen">Listen</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

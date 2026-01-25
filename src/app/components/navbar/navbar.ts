@@ -10,19 +10,15 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   styleUrl: './navbar.scss',
 })
 export class Navbar {
-  navLinks = [
+  leftNavLinks = [
     { label: 'HOME', path: '' },
-    { label: 'MUSIC', path: '/music' },
-    { label: 'APPEARANCES', path: '/appearances' },
-    { label: 'CONTACT', path: '/contact' },
-    { label: 'MERCH', path: '/merch' }
+    { label: 'MUSIC', path: '/music' }
   ];
 
-  socialLinks = [
-    { icon: 'youtube', url: 'https://youtube.com' },
-    { icon: 'spotify', url: 'https://spotify.com' },
-    { icon: 'twitter', url: 'https://twitter.com' },
-    { icon: 'instagram', url: 'https://instagram.com' }
+  rightNavLinks = [
+    { label: 'APPEARANCES', path: '/appearances' },
+    { label: 'MERCH', path: '/merch' },
+    { label: 'CONTACT', path: '/contact' }
   ];
 
   menuOpen = false;

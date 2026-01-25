@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -8,61 +8,73 @@ import { CommonModule } from '@angular/common';
   templateUrl: './music.html',
   styleUrl: './music.scss',
 })
-export class Music {
+export class Music implements OnInit, OnDestroy {
+  // optional top/header image
+  headerImage = '/tuwakituwa.png';
+
+  // Albums: each album has an image and its own tracks
   albums = [
     {
       id: 1,
-      title: 'Album Title 1',
-      artist: 'Artist Name',
-      year: 2024,
-      image: '/assets/images/square.jpg',
-      tracks: 12,
-      streams: '5.2M'
+      title: 'TuWakiTuwa',
+      image: '/squareImg/square1.jpg',
+      tracks: [
+        { title: 'TuWakiTuwa (Original)', spotify: 'https://open.spotify.com/track/7qiZfU4dY1lsylvNEprXGy' },
+        { title: 'Midnight Beat', spotify: 'https://open.spotify.com/track/0VjIjW4GlUZAMYd2vXMi3b' }
+      ]
     },
     {
       id: 2,
-      title: 'Album Title 2',
-      artist: 'Artist Name',
-      year: 2023,
-      image: '/assets/images/square.jpg',
-      tracks: 14,
-      streams: '8.1M'
+      title: 'Echoes & Neon',
+      image: '/squareImg/square2.jpg',
+      tracks: [
+        { title: 'Echoes', spotify: 'https://open.spotify.com/track/7yO4IdJjCEPz7YgZMe25iS' },
+        { title: 'Neon Sky', spotify: 'https://open.spotify.com/track/0VjIjW4GlUZAMYd2vXMi3b' }
+      ]
     },
     {
       id: 3,
-      title: 'Album Title 3',
-      artist: 'Artist Name',
-      year: 2022,
-      image: '/assets/images/square.jpg',
-      tracks: 11,
-      streams: '12.5M'
-    },
-    {
-      id: 4,
-      title: 'Album Title 4',
-      artist: 'Artist Name',
-      year: 2021,
-      image: '/assets/images/square.jpg',
-      tracks: 13,
-      streams: '15.3M'
-    },
-    {
-      id: 5,
-      title: 'Album Title 5',
-      artist: 'Artist Name',
-      year: 2020,
-      image: '/assets/images/square.jpg',
-      tracks: 12,
-      streams: '20.1M'
-    },
-    {
-      id: 6,
-      title: 'Album Title 6',
-      artist: 'Artist Name',
-      year: 2019,
-      image: '/assets/images/square.jpg',
-      tracks: 15,
-      streams: '25.8M'
+      title: 'Midnight Lull',
+      image: '/squareImg/square3.jpg',
+      tracks: [
+        { title: 'Lullaby (Interlude)', spotify: 'https://open.spotify.com/track/7qiZfU4dY1lsylvNEprXGy' }
+      ]
     }
   ];
+
+  currentAlbum = 0;
+  albumTimer: any = null;
+
+  ngOnInit(): void {
+    this.startAlbums();
+  }
+
+  ngOnDestroy(): void {
+    this.stopAlbums();
+  }
+
+  startAlbums() {
+    this.stopAlbums();
+    this.albumTimer = setInterval(() => this.nextAlbum(), 4000);
+  }
+
+  stopAlbums() {
+    if (this.albumTimer) {
+      clearInterval(this.albumTimer);
+      this.albumTimer = null;
+    }
+  }
+
+  nextAlbum() {
+    this.currentAlbum = (this.currentAlbum + 1) % this.albums.length;
+  }
+
+  prevAlbum() {
+    this.currentAlbum = (this.currentAlbum - 1 + this.albums.length) % this.albums.length;
+  }
+
+  selectAlbum(i: number) {
+    this.currentAlbum = i;
+    this.startAlbums();
+  }
 }
