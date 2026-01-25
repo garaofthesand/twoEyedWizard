@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit, NgZone } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
@@ -9,9 +9,16 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
   templateUrl: './home.html',
   styleUrl: './home.scss',
 })
-export class Home implements OnInit, OnDestroy {
+export class Home implements OnInit, OnDestroy, AfterViewInit {
 
-  constructor(private sanitizer: DomSanitizer) {}
+  constructor(private sanitizer: DomSanitizer, private ngZone: NgZone) {}
+
+  // detach functions for swipe listeners
+  slideshowDetach: (() => void) | undefined;
+  spotifyDetach: (() => void) | undefined;
+
+  // keep a stable reference so we can remove the listener on destroy
+  resizeHandler = () => this.checkMobile();
 
   /* ===========================
      HERO IMAGE SLIDESHOW
@@ -28,7 +35,8 @@ export class Home implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.checkMobile();
-    window.addEventListener('resize', () => this.checkMobile());
+
+    window.addEventListener('resize', this.resizeHandler);
 
     this.startSlideshow();
     this.startSpotifySlideshow();
@@ -37,7 +45,37 @@ export class Home implements OnInit, OnDestroy {
   ngOnDestroy() {
     clearInterval(this.slideInterval);
     clearInterval(this.spotifySlideInterval);
-    window.removeEventListener('resize', () => this.checkMobile());
+    window.removeEventListener('resize', this.resizeHandler);
+    if (this.slideshowDetach) this.slideshowDetach();
+    if (this.spotifyDetach) this.spotifyDetach();
+  }
+
+  ngAfterViewInit() {
+    try {
+      const { attachSwipe } = require('../../utils/swipe');
+
+      const slideEl = document.querySelector('.slideshow-container') as HTMLElement;
+      if (slideEl) {
+        this.slideshowDetach = attachSwipe(slideEl, (dir) =>
+          this.ngZone.run(() => {
+            if (dir === 'left') this.nextSlide();
+            else this.prevSlide();
+          })
+        );
+      }
+
+      const spotifyEl = document.querySelector('.spotify-promo-wrapper') as HTMLElement;
+      if (spotifyEl) {
+        this.spotifyDetach = attachSwipe(spotifyEl, (dir) =>
+          this.ngZone.run(() => {
+            if (dir === 'left') this.nextSpotifySlide();
+            else this.prevSpotifySlide();
+          })
+        );
+      }
+    } catch (err) {
+      // ignore if swipe util can't be attached
+    }
   }
 
   checkMobile() {
