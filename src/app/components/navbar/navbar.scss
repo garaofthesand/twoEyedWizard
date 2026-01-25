@@ -11,15 +11,18 @@ $border-color: #222;
   z-index: 1000;
   border-bottom: 1px solid $border-color;
 
+
+
   .navbar-container {
     max-width: 1400px;
     margin: 0 auto;
     padding: 0 2rem;
+    
+    
     display: flex;
-    justify-content: center;
     align-items: center;
-    gap: 3rem;
-  }
+    justify-content: space-between;
+    }
 
   .navbar-brand {
     flex-shrink: 0;
@@ -85,34 +88,29 @@ $border-color: #222;
 
   .nav-left,
   .nav-right {
-    flex: 1 1 auto;
     display: flex;
     align-items: center;
-
+  
     .nav-list {
       list-style: none;
       display: flex;
       gap: 2rem;
       margin: 0;
       padding: 0;
-      
-      .nav-item {
-        .nav-link {
-          text-decoration: none;
-          color: $text-light;
-          font-size: 0.9rem;
-          font-weight: 600;
-          text-transform: uppercase;
-          letter-spacing: 1px;
-          transition: all 0.3s ease;
-          padding: 0.5rem 0;
-          border-bottom: 2px solid transparent;
-
-          &:hover,
-          &.active {
-            color: $text-light;
-            border-bottom-color: $text-light;
-          }
+  
+      .nav-link {
+        text-decoration: none;
+        color: #fff;
+        font-size: 0.9rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        border-bottom: 2px solid transparent;
+        transition: all 0.3s ease;
+  
+        &:hover,
+        &.active {
+          border-bottom-color: #fff;
         }
       }
     }
@@ -127,11 +125,12 @@ $border-color: #222;
   }
 
   .navbar-brand {
-    margin: 0 1.5rem;
+    margin-right: auto;
   }
 
   .nav-menu {
-    display: none;
+    display: flex;
+    align-items: center;
   }
 }
 

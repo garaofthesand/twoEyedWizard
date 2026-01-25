@@ -10,7 +10,13 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
   styleUrl: './home.scss',
 })
 export class Home implements OnInit, OnDestroy {
+
   constructor(private sanitizer: DomSanitizer) {}
+
+  /* ===========================
+     HERO IMAGE SLIDESHOW
+  ============================ */
+
   slideImages = [
     { id: 1, pc: 'landscapImg/landscape1.jpg', mobile: 'squareImg/square1.jpg' },
     { id: 2, pc: 'landscapImg/landscape2.jpg', mobile: 'squareImg/square2.jpg' }
@@ -23,17 +29,14 @@ export class Home implements OnInit, OnDestroy {
   ngOnInit() {
     this.checkMobile();
     window.addEventListener('resize', () => this.checkMobile());
+
     this.startSlideshow();
     this.startSpotifySlideshow();
   }
 
   ngOnDestroy() {
-    if (this.slideInterval) {
-      clearInterval(this.slideInterval);
-    }
-    if (this.spotifySlideInterval) {
-      clearInterval(this.spotifySlideInterval);
-    }
+    clearInterval(this.slideInterval);
+    clearInterval(this.spotifySlideInterval);
     window.removeEventListener('resize', () => this.checkMobile());
   }
 
@@ -53,77 +56,68 @@ export class Home implements OnInit, OnDestroy {
   }
 
   prevSlide() {
-    this.currentSlide = (this.currentSlide - 1 + this.slideImages.length) % this.slideImages.length;
+    this.currentSlide =
+      (this.currentSlide - 1 + this.slideImages.length) %
+      this.slideImages.length;
     this.resetSlideTimer();
   }
 
   startSlideshow() {
-    this.slideInterval = setInterval(() => {
-      this.nextSlide();
-    }, 5000); // Change slide every 5 seconds
+    this.slideInterval = setInterval(() => this.nextSlide(), 5000);
   }
 
   resetSlideTimer() {
-    if (this.slideInterval) {
-      clearInterval(this.slideInterval);
-    }
+    clearInterval(this.slideInterval);
     this.startSlideshow();
   }
 
-  spotifyPromo = [
+  /* ===========================
+     SPOTIFY SONG SLIDESHOW
+  ============================ */
+
+  spotifySongs = [
     {
-      songName: 'Shape of You',
-      spotifyLink: 'https://open.spotify.com/track/7qiZfU4dY1lsylvNEprXGy',
-      spotifyEmbedId: '7qiZfU4dY1lsylvNEprXGy',
+      embedId: '4RnTDu87hZVLjSd2X6af1F',
+      spotifyLink: 'https://open.spotify.com/track/4RnTDu87hZVLjSd2X6af1F',
       image: 'squareImg/square1.jpg'
     },
     {
-      songName: 'Blinding Lights',
-      spotifyLink: 'https://open.spotify.com/track/0VjIjW4GlUZAMYd2vXMwbk',
-      spotifyEmbedId: '0VjIjW4GlUZAMYd2vXMwbk',
-      image: 'squareImg/square2.jpg'
-    },
-    {
-      songName: 'As It Was',
-      spotifyLink: 'https://open.spotify.com/track/5FVd6KqnYLDQQOz37C89zw',
-      spotifyEmbedId: '5FVd6KqnYLDQQOz37C89zw',
+      embedId: '3hhrPavP2weEDNuJTtZHU3',
+      spotifyLink: 'https://open.spotify.com/track/3hhrPavP2weEDNuJTtZHU3',
       image: 'squareImg/square1.jpg'
-    },
-    {
-      songName: 'Anti-Hero',
-      spotifyLink: 'https://open.spotify.com/track/0geTzdk8syyVQ7unUZnBVP',
-      spotifyEmbedId: '0geTzdk8syyVQ7unUZnBVP',
-      image: 'squareImg/square2.jpg'
     }
   ];
 
-  spotifyPromoSlide = 0;
+  spotifyIndex = 0;
   spotifySlideInterval: any;
 
   nextSpotifySlide() {
-    this.spotifyPromoSlide = (this.spotifyPromoSlide + 1) % this.spotifyPromo.length;
+    this.spotifyIndex =
+      (this.spotifyIndex + 1) % this.spotifySongs.length;
   }
 
   prevSpotifySlide() {
-    this.spotifyPromoSlide = (this.spotifyPromoSlide - 1 + this.spotifyPromo.length) % this.spotifyPromo.length;
-    this.resetSpotifySlideTimer();
+    this.spotifyIndex =
+      (this.spotifyIndex - 1 + this.spotifySongs.length) %
+      this.spotifySongs.length;
+    this.resetSpotifyTimer();
   }
 
   startSpotifySlideshow() {
-    this.spotifySlideInterval = setInterval(() => {
-      this.nextSpotifySlide();
-    }, 4000); // Change song every 4 seconds
+    this.spotifySlideInterval = setInterval(
+      () => this.nextSpotifySlide(),
+      6000
+    );
   }
 
-  resetSpotifySlideTimer() {
-    if (this.spotifySlideInterval) {
-      clearInterval(this.spotifySlideInterval);
-    }
+  resetSpotifyTimer() {
+    clearInterval(this.spotifySlideInterval);
     this.startSpotifySlideshow();
   }
 
   getSpotifyUrl(): SafeResourceUrl {
-    const url = `https://open.spotify.com/embed/track/${this.spotifyPromo[this.spotifyPromoSlide].spotifyEmbedId}?utm_source=generator`;
-    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+    const embed =
+      `https://open.spotify.com/embed/track/${this.spotifySongs[this.spotifyIndex].embedId}`;
+    return this.sanitizer.bypassSecurityTrustResourceUrl(embed);
   }
 }

@@ -1,62 +1,82 @@
-<!-- Slideshow Section -->
+<!-- =======================
+     IMAGE SLIDESHOW
+======================= -->
 <section class="slideshow-section">
   <div class="slideshow-container">
+
     <div class="slide-wrapper">
-      <img [src]="getCurrentImage()" [alt]="'Slide ' + (currentSlide + 1)" class="slide-image" />
+      <img
+        [src]="getCurrentImage()"
+        class="slide-image"
+        [alt]="'Slide ' + (currentSlide + 1)" />
     </div>
-    
-    <!-- Arrow Navigation -->
-    <button class="slide-arrow prev-arrow" (click)="prevSlide()" aria-label="Previous slide">
-      <i class="fas fa-chevron-left"></i>
-    </button>
-    <button class="slide-arrow next-arrow" (click)="nextSlide()" aria-label="Next slide">
-      <i class="fas fa-chevron-right"></i>
+
+    <button class="slide-arrow prev-arrow" (click)="prevSlide()">
+      ‹
     </button>
 
-    <!-- Slide Indicators -->
+    <button class="slide-arrow next-arrow" (click)="nextSlide()">
+      ›
+    </button>
+
     <div class="slide-indicators">
-      <span 
-        *ngFor="let slide of slideImages; let i = index" 
-        class="indicator" 
+      <span
+        *ngFor="let s of slideImages; let i = index"
+        class="indicator"
         [class.active]="i === currentSlide"
         (click)="currentSlide = i; resetSlideTimer()">
       </span>
     </div>
+
   </div>
 </section>
 
-<!-- Spotify Promotion Section -->
+<!-- =======================
+     SPOTIFY SONG SLIDESHOW
+======================= -->
 <section class="spotify-promo-section">
   <div class="spotify-promo-wrapper">
-    <button class="slide-arrow prev-arrow" (click)="prevSpotifySlide()" aria-label="Previous album">
-      <i class="fas fa-chevron-left"></i>
+
+    <button class="slide-arrow prev-arrow" (click)="prevSpotifySlide()">
+      ‹
     </button>
-    
+
     <div class="spotify-promo-container">
+
       <div class="spotify-album-slide">
-        <img [src]="spotifyPromo[spotifyPromoSlide].image" [alt]="spotifyPromo[spotifyPromoSlide].songName" />
+        <img
+          [src]="spotifySongs[spotifyIndex].image" />
       </div>
+
       <div class="spotify-content">
-        <h3>'{{ spotifyPromo[spotifyPromoSlide].songName }}' OUT NOW</h3>
+        <h3>
+          OUT NOW
+        </h3>
+
         <div class="spotify-player">
-          <iframe [src]="getSpotifyUrl()" 
-                  width="100%" 
-                  height="152" 
-                  frameborder="0" 
-                  allowfullscreen="" 
-                  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                  loading="lazy"
-                  title="Spotify Embed">
+          <iframe
+            [src]="getSpotifyUrl()"
+            width="100%"
+            height="152"
+            frameborder="0"
+            allow="encrypted-media"
+            loading="lazy">
           </iframe>
         </div>
-        <a [href]="spotifyPromo[spotifyPromoSlide].spotifyLink" target="_blank" class="btn-listen">
-          LISTEN NOW
+
+        <a
+          class="btn-listen"
+          [href]="spotifySongs[spotifyIndex].spotifyLink"
+          target="_blank">
+          LISTEN ON SPOTIFY
         </a>
       </div>
+
     </div>
 
-    <button class="slide-arrow next-arrow" (click)="nextSpotifySlide()" aria-label="Next album">
-      <i class="fas fa-chevron-right"></i>
+    <button class="slide-arrow next-arrow" (click)="nextSpotifySlide()">
+      ›
     </button>
+
   </div>
 </section>

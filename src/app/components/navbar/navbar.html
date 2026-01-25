@@ -1,33 +1,19 @@
 <nav class="navbar">
   <div class="navbar-container">
-    <!-- Left Navigation -->
-    <div class="nav-left">
-      <ul class="nav-list">
-        <li *ngFor="let link of leftNavLinks" class="nav-item">
-          <a 
-            [routerLink]="link.path" 
-            routerLinkActive="active"
-            [routerLinkActiveOptions]="{ exact: true }"
-            class="nav-link">
-            {{ link.label }}
-          </a>
-        </li>
-      </ul>
-    </div>
 
-    <!-- Center Logo -->
+    <!-- LOGO (LEFT) -->
     <div class="navbar-brand">
       <a routerLink="/" class="logo">
         <img src="logo.jpg" alt="Artist Logo" class="logo-img" />
       </a>
     </div>
 
-    <!-- Right Navigation -->
-    <div class="nav-right">
+    <!-- MENU (RIGHT) -->
+    <div class="nav-right nav-menu" [class.active]="menuOpen">
       <ul class="nav-list">
-        <li *ngFor="let link of rightNavLinks" class="nav-item">
-          <a 
-            [routerLink]="link.path" 
+        <li *ngFor="let link of navLinks" class="nav-item">
+          <a
+            [routerLink]="link.path"
             routerLinkActive="active"
             [routerLinkActiveOptions]="{ exact: true }"
             class="nav-link">
@@ -37,11 +23,15 @@
       </ul>
     </div>
 
-    <!-- Mobile Menu Toggle -->
-    <button class="menu-toggle" (click)="toggleMenu()" [class.active]="menuOpen">
+    <!-- MOBILE MENU TOGGLE -->
+    <button
+      class="menu-toggle"
+      (click)="toggleMenu()"
+      [class.active]="menuOpen">
       <span></span>
       <span></span>
       <span></span>
     </button>
+
   </div>
 </nav>

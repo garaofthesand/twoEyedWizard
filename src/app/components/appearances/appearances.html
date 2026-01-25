@@ -1,23 +1,67 @@
 <div class="appearances-container">
+
   <div class="appearances-header">
     <h1>Appearances & Events</h1>
-    <p>Schedule of upcoming performances and appearances</p>
+    <p>Schedule of performances and appearances</p>
   </div>
 
-  <div class="events-list">
-    <div *ngFor="let appearance of appearances" class="event-card">
-      <div class="event-image">
-        <img [src]="appearance.image" [alt]="appearance.event" />
-        <span class="status-badge" [class]="appearance.status.toLowerCase()">{{ appearance.status }}</span>
-      </div>
-      <div class="event-details">
-        <h3>{{ appearance.event }}</h3>
-        <div class="event-info">
-          <p class="date">📅 {{ appearance.date }}</p>
-          <p class="location">📍 {{ appearance.location }}</p>
+  <!-- UPCOMING -->
+  <section class="events-section">
+    <h2>Upcoming</h2>
+
+    <div class="events-list">
+      <div *ngFor="let appearance of upcoming" class="event-card">
+
+        <div class="event-image">
+          <img [src]="appearance.image" [alt]="appearance.event" />
+          <span class="status-badge upcoming">Upcoming</span>
         </div>
-        <button class="btn-get-tickets">Get Tickets</button>
+
+        <div class="event-details">
+          <h3>{{ appearance.event }}</h3>
+
+          <div class="event-info">
+            <p>📅 {{ appearance.date }}</p>
+            <p>📍 {{ appearance.location }}</p>
+          </div>
+
+          <a
+            class="btn-link"
+            [href]="appearance.link"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            View Details
+          </a>
+        </div>
+
       </div>
     </div>
-  </div>
+  </section>
+
+  <!-- FINISHED -->
+  <section class="events-section">
+    <h2>Finished</h2>
+
+    <div class="events-list">
+      <div *ngFor="let appearance of finished" class="event-card finished">
+
+        <div class="event-image">
+          <img [src]="appearance.image" [alt]="appearance.event" />
+          <span class="status-badge finished">Finished</span>
+        </div>
+
+        <div class="event-details">
+          <h3>{{ appearance.event }}</h3>
+
+          <div class="event-info">
+            <p>📅 {{ appearance.date }}</p>
+            <p>📍 {{ appearance.location }}</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
 </div>

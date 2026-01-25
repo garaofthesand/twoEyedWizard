@@ -21,6 +21,10 @@ export class Navbar {
     { label: 'CONTACT', path: '/contact' }
   ];
 
+  get navLinks() {
+    return [...this.leftNavLinks, ...this.rightNavLinks];
+  }
+
   menuOpen = false;
 
   toggleMenu() {
