@@ -5,10 +5,17 @@
   <div class="slideshow-container">
 
     <div class="slide-wrapper">
-      <img
-        [src]="getCurrentImage()"
-        class="slide-image"
-        [alt]="'Slide ' + (currentSlide + 1)" />
+      <picture *ngIf="slideImages.length">
+        <source media="(max-width: 768px)" [attr.srcset]="slideImages[currentSlide]?.mobile" />
+        <source [attr.srcset]="slideImages[currentSlide]?.pc" />
+        <img
+          [src]="slideImages[currentSlide]?.pc"
+          class="slide-image"
+          [alt]="'Slide ' + (currentSlide + 1)"
+          loading="lazy"
+        />
+      </picture>
+      <div class="slide-overlay" aria-hidden="true"></div>
     </div>
 
     <button class="slide-arrow prev-arrow" (click)="prevSlide()">

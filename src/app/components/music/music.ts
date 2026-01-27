@@ -1,4 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit, NgZone } from '@angular/core';
+import { attachSwipe } from '../../utils/swipe';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -8,7 +9,8 @@ import { CommonModule } from '@angular/common';
   templateUrl: './music.html',
   styleUrl: './music.scss',
 })
-export class Music implements OnInit, OnDestroy {
+export class Music implements OnInit, OnDestroy, AfterViewInit {
+  constructor(private ngZone: NgZone) {}
   // optional top/header image
   headerImage = '/tuwakituwa.png';
 
@@ -17,7 +19,7 @@ export class Music implements OnInit, OnDestroy {
     {
       id: 1,
       title: 'TuWakiTuwa',
-      image: '/squareImg/square1.jpg',
+      image: '/squareImg/home1.jpg',
       tracks: [
         { title: 'TuWakiTuwa (Original)', spotify: 'https://open.spotify.com/track/7qiZfU4dY1lsylvNEprXGy' },
         { title: 'Midnight Beat', spotify: 'https://open.spotify.com/track/0VjIjW4GlUZAMYd2vXMi3b' }
@@ -26,7 +28,7 @@ export class Music implements OnInit, OnDestroy {
     {
       id: 2,
       title: 'Echoes & Neon',
-      image: '/squareImg/square2.jpg',
+      image: '/squareImg/home2.jpg',
       tracks: [
         { title: 'Echoes', spotify: 'https://open.spotify.com/track/7yO4IdJjCEPz7YgZMe25iS' },
         { title: 'Neon Sky', spotify: 'https://open.spotify.com/track/0VjIjW4GlUZAMYd2vXMi3b' }
@@ -35,7 +37,7 @@ export class Music implements OnInit, OnDestroy {
     {
       id: 3,
       title: 'Midnight Lull',
-      image: '/squareImg/square3.jpg',
+      image: '/squareImg/home1.jpg',
       tracks: [
         { title: 'Lullaby (Interlude)', spotify: 'https://open.spotify.com/track/7qiZfU4dY1lsylvNEprXGy' }
       ]
@@ -44,13 +46,58 @@ export class Music implements OnInit, OnDestroy {
 
   currentAlbum = 0;
   albumTimer: any = null;
+  isMobile = false;
+  private albumDetach: (() => void) | undefined;
+  // stable resize handler
+  resizeHandler = () => this.handleResize();
 
   ngOnInit(): void {
+    this.checkMobile();
+    window.addEventListener('resize', this.resizeHandler);
     this.startAlbums();
   }
 
   ngOnDestroy(): void {
     this.stopAlbums();
+    window.removeEventListener('resize', this.resizeHandler);
+    if (this.albumDetach) this.albumDetach();
+  }
+
+  ngAfterViewInit(): void {
+    this.updateAlbumSwipe();
+  }
+
+  checkMobile() {
+    this.isMobile = window.innerWidth <= 768;
+  }
+
+  handleResize() {
+    const was = this.isMobile;
+    this.checkMobile();
+    if (was !== this.isMobile) this.updateAlbumSwipe();
+  }
+
+  updateAlbumSwipe() {
+    try {
+      const el = document.querySelector('.album-art') as HTMLElement;
+      if (this.isMobile) {
+        if (el && !this.albumDetach) {
+          this.albumDetach = attachSwipe(el, (dir: 'left' | 'right') => {
+            this.ngZone.run(() => {
+              if (dir === 'left') this.nextAlbum();
+              else this.prevAlbum();
+            });
+          });
+        }
+      } else {
+        if (this.albumDetach) {
+          this.albumDetach();
+          this.albumDetach = undefined;
+        }
+      }
+    } catch (err) {
+      // ignore
+    }
   }
 
   startAlbums() {

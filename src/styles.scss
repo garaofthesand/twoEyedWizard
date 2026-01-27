@@ -69,26 +69,65 @@ app-home {
 
       .slide-wrapper {
         width: 100%;
-        height: 600px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        position: relative;
         overflow: hidden;
+        background: #000000; /* ensure no page gradient shows through below images */
+        /* increase default max height so desktop images appear larger */
+        max-height: clamp(450px, 70vh, 1000px);
 
         .slide-image {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
           display: block;
-          animation: slideIn 0.5s ease-in-out;
+          /* show the full image while keeping it large */
+          width: auto;
+          height: auto;
+          max-width: 100%;
+          max-height: 100%;
+          object-fit: contain; /* show whole image */
+          transform-origin: center;
+          transition: transform 0.6s ease, opacity 0.5s ease;
+        }
+
+        .slide-overlay {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(180deg, rgba(0,0,0,0.12) 0%, rgba(0,0,0,0.5) 100%);
+          pointer-events: none;
         }
 
         @media (max-width: 768px) {
-          height: 400px;
+          max-height: clamp(220px, 38vh, 420px);
+
+          .slide-image {
+            object-fit: contain; /* show whole image on mobile */
+            width: 100%;
+            height: auto;
+            max-height: 100%;
+          }
         }
 
         @media (max-width: 480px) {
-          height: 300px;
+          max-height: clamp(180px, 32vh, 340px);
+        }
+      }
+
+      /* Mobile: show whole image (no crop) and center it */
+      @media (max-width: 768px) {
+        .slide-wrapper {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .slide-wrapper .slide-image {
+          object-fit: contain;
+          height: auto;
+          max-height: 100%;
+          width: 100%;
+        }
+
+        /* remove max-height clamp on container so image can size naturally if needed */
+        .slideshow-container {
+          max-height: none;
         }
       }
 
@@ -201,6 +240,10 @@ app-home {
       display: flex;
       align-items: center;
       gap: 2rem;
+
+      /* enforce black background through the promo area */
+      background: #000000 !important;
+      box-shadow: none !important;
 
       @media (max-width: 768px) {
         gap: 1.5rem;
@@ -377,5 +420,28 @@ app-home {
   to {
     opacity: 1;
     transform: translateX(0);
+  }
+}
+
+/* Global overrides to ensure slideshow area is solid and images display fully */
+.slideshow-section,
+.slideshow-container,
+.slide-wrapper {
+  background: #000 !important;
+}
+
+.slideshow-container {
+  overflow: hidden;
+}
+
+.slide-wrapper .slide-image {
+  width: 100% !important;
+  height: auto !important;
+  object-fit: cover !important;
+}
+
+@media (max-width: 768px) {
+  .slide-wrapper .slide-image {
+    object-fit: contain !important;
   }
 }

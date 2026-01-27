@@ -1,0 +1,42 @@
+{
+  "site": {
+    "title": "Two Eyed Wizard",
+    "copyright": "© {{year}} Brandon Colaco. All rights reserved."
+  },
+  "navbar": {
+    "logoAlt": "Artist Logo",
+    "leftLinks": [
+      { "label": "HOME", "path": "" },
+      { "label": "MUSIC", "path": "/music" }
+    ],
+    "rightLinks": [
+      { "label": "APPEARANCES", "path": "/appearances" },
+      { "label": "MERCH", "path": "/merch" },
+      { "label": "CONTACT", "path": "/contact" }
+    ]
+  },
+  "home": {
+    "slides": [
+      { "pc": "/landscapImg/landscape1.jpg", "mobile": "/squareImg/home1.jpg" },
+      { "pc": "/landscapImg/landscape2.jpg", "mobile": "/squareImg/home2.jpg" }
+    ],
+    "spotify": {
+      "title": "Latest Releases",
+      "buttonText": "LISTEN ON SPOTIFY",
+      "songs": [
+        { "embedId": "4RnTDu87hZVLjSd2X6af1F", "spotifyLink": "https://open.spotify.com/track/4RnTDu87hZVLjSd2X6af1F", "image": "/squareImg/home1.jpg" },
+        { "embedId": "3hhrPavP2weEDNuJTtZHU3", "spotifyLink": "https://open.spotify.com/track/3hhrPavP2weEDNuJTtZHU3", "image": "/squareImg/home1.jpg" }
+      ]
+    }
+  },
+  "footer": {
+    "followTitle": "Follow Us",
+    "socialLinks": [
+      { "label": "Twitter", "url": "https://twitter.com", "icon": "fab fa-twitter" },
+      { "label": "Instagram", "url": "https://instagram.com", "icon": "fab fa-instagram" }
+    ]
+  },
+  "buttons": {
+    "listen": "LISTEN ON SPOTIFY"
+  }
+}
