@@ -1,6 +1,8 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ContentService } from '../../services/content.service';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-contact',
@@ -13,6 +15,7 @@ export class Contact implements OnInit {
   contactForm!: FormGroup;
   submitted = false;
   private fb = inject(FormBuilder);
+  private content = inject(ContentService);
 
   ngOnInit() {
     this.contactForm = this.fb.group({
@@ -21,6 +24,18 @@ export class Contact implements OnInit {
       subject: ['', Validators.required],
       message: ['', [Validators.required, Validators.minLength(10)]]
     });
+
+    // populate defaults from content.json if present
+    try {
+      this.content.get('contact').pipe(first()).subscribe((c: any) => {
+        if (!c) return;
+        if (c.defaults && this.contactForm) {
+          this.contactForm.patchValue(c.defaults);
+        }
+      });
+    } catch (err) {
+      // ignore
+    }
   }
 
   onSubmit() {

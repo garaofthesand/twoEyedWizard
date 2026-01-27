@@ -6,10 +6,11 @@
 
     <div class="slide-wrapper">
       <picture *ngIf="slideImages.length">
-        <source media="(max-width: 768px)" [attr.srcset]="slideImages[currentSlide]?.mobile" />
-        <source [attr.srcset]="slideImages[currentSlide]?.pc" />
+        <source media="(max-width: 768px)" [attr.srcset]="buildSrcset(slideImages[currentSlide]?.mobile, [480,800])" sizes="100vw" />
+        <source [attr.srcset]="buildSrcset(slideImages[currentSlide]?.pc, [1024,1600])" sizes="100vw" />
         <img
           [src]="slideImages[currentSlide]?.pc"
+          [attr.srcset]="buildSrcset(slideImages[currentSlide]?.pc, [1024,1600])"
           class="slide-image"
           [alt]="'Slide ' + (currentSlide + 1)"
           loading="lazy"
@@ -51,8 +52,8 @@
     <div class="spotify-promo-container">
 
       <div class="spotify-album-slide">
-        <img
-          [src]="spotifySongs[spotifyIndex].image" />
+        
+       <!-- <img  [src]="spotifySongs[spotifyIndex].image" />   -->
       </div>
 
       <div class="spotify-content">

@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ContentService } from '../../services/content.service';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-appearances',
@@ -8,7 +10,14 @@ import { CommonModule } from '@angular/common';
   templateUrl: './appearances.html',
   styleUrl: './appearances.scss',
 })
-export class Appearances {
+export class Appearances implements OnInit {
+  constructor(private content: ContentService) {}
+  buildSrcset(base?: string, widths: number[] = [480, 1024, 1600]): string {
+    if (!base) return '';
+    const idx = base.lastIndexOf('.');
+    const baseNoExt = idx > -1 ? base.slice(0, idx) : base;
+    return widths.map((w) => `${baseNoExt}-${w}.svg ${w}w`).join(', ');
+  }
 
   appearances = [
     {
@@ -49,4 +58,21 @@ export class Appearances {
 
   upcoming = this.appearances.filter(a => a.status === 'Upcoming');
   finished = this.appearances.filter(a => a.status === 'Finished');
+
+  ngOnInit() {
+    try {
+      this.content.get('appearances').pipe(first()).subscribe((v: any) => {
+        if (!v) return;
+        // support either an array or object with `events` key
+        const arr = Array.isArray(v) ? v : v.events || v.list || null;
+        if (Array.isArray(arr)) {
+          this.appearances = arr;
+          this.upcoming = this.appearances.filter(a => a.status === 'Upcoming');
+          this.finished = this.appearances.filter(a => a.status === 'Finished');
+        }
+      });
+    } catch (err) {
+      // ignore
+    }
+  }
 }

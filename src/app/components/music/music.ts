@@ -1,5 +1,7 @@
 import { Component, OnInit, OnDestroy, AfterViewInit, NgZone } from '@angular/core';
 import { attachSwipe } from '../../utils/swipe';
+import { ContentService } from '../../services/content.service';
+import { first } from 'rxjs/operators';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -10,7 +12,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './music.scss',
 })
 export class Music implements OnInit, OnDestroy, AfterViewInit {
-  constructor(private ngZone: NgZone) {}
+  constructor(private ngZone: NgZone, private content: ContentService) {}
   // optional top/header image
   headerImage = '/tuwakituwa.png';
 
@@ -55,6 +57,17 @@ export class Music implements OnInit, OnDestroy, AfterViewInit {
     this.checkMobile();
     window.addEventListener('resize', this.resizeHandler);
     this.startAlbums();
+    // load albums/header from content.json if provided
+    try {
+      this.content.get('music').pipe(first()).subscribe((m: any) => {
+        if (!m) return;
+        if (Array.isArray(m.albums)) this.albums = m.albums;
+        else if (Array.isArray(m)) this.albums = m;
+        if (m.headerImage) this.headerImage = m.headerImage;
+      });
+    } catch (err) {
+      // ignore
+    }
   }
 
   ngOnDestroy(): void {
@@ -123,5 +136,12 @@ export class Music implements OnInit, OnDestroy, AfterViewInit {
   selectAlbum(i: number) {
     this.currentAlbum = i;
     this.startAlbums();
+  }
+
+  buildSrcset(base?: string, widths: number[] = [480, 800, 1600]): string {
+    if (!base) return '';
+    const idx = base.lastIndexOf('.');
+    const baseNoExt = idx > -1 ? base.slice(0, idx) : base;
+    return widths.map((w) => `${baseNoExt}-${w}.svg ${w}w`).join(', ');
   }
 }

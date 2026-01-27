@@ -132,6 +132,14 @@ export class Home implements OnInit, OnDestroy, AfterViewInit {
       : this.slideImages[this.currentSlide].pc;
   }
 
+  // build a simple srcset string from a base path by appending -{w}.svg variants
+  buildSrcset(base?: string, widths: number[] = [480, 1024, 1600]): string {
+    if (!base) return '';
+    const idx = base.lastIndexOf('.');
+    const baseNoExt = idx > -1 ? base.slice(0, idx) : base;
+    return widths.map((w) => `${baseNoExt}-${w}.svg ${w}w`).join(', ');
+  }
+
   nextSlide() {
     this.currentSlide = (this.currentSlide + 1) % this.slideImages.length;
     this.resetSlideTimer();

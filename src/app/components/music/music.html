@@ -10,7 +10,13 @@
 					<button class="arrow prev" (click)="prevAlbum()">&#10094;</button>
 
 					<div class="art-frame">
-						<img [src]="albums[currentAlbum].image" [alt]="albums[currentAlbum].title" />
+						<img
+						  [attr.srcset]="buildSrcset(albums[currentAlbum].image, [480,800,1600])"
+						  sizes="(max-width:768px)80vw, 300px"
+						  [src]="albums[currentAlbum].image"
+						  [alt]="albums[currentAlbum].title"
+						  loading="lazy"
+						/>
 					</div>
 
 					<button class="arrow next" (click)="nextAlbum()">&#10095;</button>

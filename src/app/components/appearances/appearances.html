@@ -13,7 +13,13 @@
       <div *ngFor="let appearance of upcoming" class="event-card">
 
         <div class="event-image">
-          <img [src]="appearance.image" [alt]="appearance.event" />
+          <img
+            [attr.srcset]="buildSrcset(appearance.image, [480,1024,1600])"
+            sizes="(max-width:768px)100vw, (max-width:1200px)50vw, 33vw"
+            [src]="appearance.image"
+            [alt]="appearance.event"
+            loading="lazy"
+          />
           <span class="status-badge upcoming">Upcoming</span>
         </div>
 
@@ -47,7 +53,13 @@
       <div *ngFor="let appearance of finished" class="event-card finished">
 
         <div class="event-image">
-          <img [src]="appearance.image" [alt]="appearance.event" />
+          <img
+            [attr.srcset]="buildSrcset(appearance.image, [480,1024,1600])"
+            sizes="(max-width:768px)100vw, (max-width:1200px)50vw, 33vw"
+            [src]="appearance.image"
+            [alt]="appearance.event"
+            loading="lazy"
+          />
           <span class="status-badge finished">Finished</span>
         </div>
 

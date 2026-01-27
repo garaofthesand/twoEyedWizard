@@ -39,4 +39,53 @@
   "buttons": {
     "listen": "LISTEN ON SPOTIFY"
   }
+  ,"music": {
+    "headerImage": "/tuwakituwa.png",
+    "albums": [
+      {
+        "id": 1,
+        "title": "TuWakiTuwa",
+        "image": "/squareImg/home1.jpg",
+        "tracks": [
+          { "title": "TuWakiTuwa (Original)", "spotify": "https://open.spotify.com/track/7qiZfU4dY1lsylvNEprXGy" },
+          { "title": "Midnight Beat", "spotify": "https://open.spotify.com/track/0VjIjW4GlUZAMYd2vXMi3b" }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Echoes & Neon",
+        "image": "/squareImg/home2.jpg",
+        "tracks": [
+          { "title": "Echoes", "spotify": "https://open.spotify.com/track/7yO4IdJjCEPz7YgZMe25iS" }
+        ]
+      }
+    ]
+  },
+  "appearances": [
+    {
+      "id": 1,
+      "event": "Music Festival 2024",
+      "date": "May 15–17, 2024",
+      "location": "Los Angeles, CA",
+      "status": "Upcoming",
+      "link": "https://example.com/festival",
+      "image": "/landscapImg/landscape1.jpg"
+    },
+    {
+      "id": 2,
+      "event": "Summer Concert Series",
+      "date": "July 10–25, 2023",
+      "location": "Various Venues",
+      "status": "Finished",
+      "image": "/landscapImg/landscape2.jpg"
+    }
+  ],
+  "contact": {
+    "defaults": {
+      "name": "",
+      "email": "",
+      "subject": "Booking inquiry",
+      "message": ""
+    }
+  }
 }
