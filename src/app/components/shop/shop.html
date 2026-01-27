@@ -5,15 +5,14 @@
   </div>
 
   <div class="products-grid">
-    <div *ngFor="let product of products" class="product-card">
+    <div *ngFor="let product of products" class="product-card" (click)="openItem(product.id)">
       <div class="product-image">
-        <img [src]="product.image" [alt]="product.name" />
-        <span class="product-category">{{ product.category }}</span>
+        <img [src]="(product.images && product.images.length) ? product.images[0] : product.image" [alt]="product.title || product.name" loading="lazy" />
       </div>
       <div class="product-info">
-        <h3>{{ product.name }}</h3>
-        <p class="price">${{ product.price }}</p>
-        <button class="btn-add-cart" (click)="addToCart(product)">Add to Cart</button>
+        <h3>{{ product.title || product.name }}</h3>
+        <p class="excerpt">{{ product.description || product.excerpt || '' }}</p>
+        <button class="btn-view" (click)="$event.stopPropagation(); openItem(product.id)">View</button>
       </div>
     </div>
   </div>

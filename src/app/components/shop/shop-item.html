@@ -1,0 +1,35 @@
+<div class="shop-item-page" *ngIf="item">
+  <div class="container product-view">
+    <div class="grid">
+      <div class="left">
+        <div class="main-media">
+          <button class="arrow left" (click)="prevSlide()">‹</button>
+          <div class="media-wrap">
+            <img *ngIf="item?.images?.length" [attr.srcset]="buildSrcset(item.images[slideIndex])" sizes="(min-width:900px)55vw,100vw" [src]="item.images[slideIndex]" [alt]="item.title + ' image ' + (slideIndex+1)" loading="lazy" />
+          </div>
+          <button class="arrow right" (click)="nextSlide()">›</button>
+        </div>
+
+        <div class="thumbs-row">
+          <button *ngFor="let img of item.images; let i = index" class="thumb" [class.active]="i === slideIndex" (click)="selectSlide(i)">
+            <img [attr.srcset]="buildSrcset(img)" sizes="80px" [src]="img" [alt]="item.title + ' thumb ' + (i+1)" loading="lazy" />
+          </button>
+        </div>
+      </div>
+
+      <aside class="right">
+        <h1 class="product-title">{{ item.title }}</h1>
+        <div class="meta">
+          <p class="price" *ngIf="item.price">{{ item.price | currency }}</p>
+        </div>
+
+        <div class="description">{{ item.description }}</div>
+
+        <div class="actions">
+          <a class="btn-contact" [href]="'mailto:' + item.contact + '?subject=' + encodeURIComponent(item.title + ' order')">Contact to Order</a>
+          <p class="contact-note">Or email: <a [href]="'mailto:' + item.contact">{{ item.contact }}</a></p>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>

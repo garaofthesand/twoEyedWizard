@@ -88,4 +88,54 @@
       "message": ""
     }
   }
+  ,"merch": [
+    {
+      "id": "bamboo-didgeridoo",
+      "title": "Bamboo Didgeridoo",
+      "description": "Handcrafted bamboo didgeridoo. Natural finish, warm tone.",
+      "contact": "orders@example.com",
+      "images": [
+        "/merch/bamboo-1-480.svg",
+        "/merch/bamboo-2-480.svg",
+        "/merch/bamboo-3-480.svg",
+        "/merch/bamboo-4-480.svg"
+      ]
+    },
+    {
+      "id": "wooden-didgeridoo",
+      "title": "Wooden Didgeridoo",
+      "description": "Seasoned hardwood didgeridoo with lacquered finish.",
+      "contact": "orders@example.com",
+      "images": [
+        "/merch/wood-1-480.svg",
+        "/merch/wood-2-480.svg",
+        "/merch/wood-3-480.svg",
+        "/merch/wood-4-480.svg"
+      ]
+    },
+    {
+      "id": "agave-didgeridoo",
+      "title": "Agave Didgeridoo",
+      "description": "Agave-based instrument, lightweight and resonant.",
+      "contact": "orders@example.com",
+      "images": [
+        "/merch/agave-1-480.svg",
+        "/merch/agave-2-480.svg",
+        "/merch/agave-3-480.svg",
+        "/merch/agave-4-480.svg"
+      ]
+    },
+    {
+      "id": "hybrid-didgeridoo",
+      "title": "Hybrid Didgeridoo",
+      "description": "Hybrid construction combining woods and modern materials.",
+      "contact": "orders@example.com",
+      "images": [
+        "/merch/hybrid-1-480.svg",
+        "/merch/hybrid-2-480.svg",
+        "/merch/hybrid-3-480.svg",
+        "/merch/hybrid-4-480.svg"
+      ]
+    }
+  ]
 }
