@@ -25,35 +25,9 @@ html, body {
   width: 100%;
   height: 100%;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
-  color: #ffffff;
+  background: linear-gradient(135deg, #0a0a0a 0%, #0a0a0a 0%);
+  color: #000;
 }
-
-/* Tight layout overrides: reduce default spacing across site */
-:root { --tight-gap: 0.5rem; --tight-vert: 0.25rem; }
-
-/* Reduce default heading and paragraph spacing */
-h1,h2,h3,h4,h5,h6 { margin: var(--tight-vert) 0; padding: 0; }
-p, ul, ol, dl, figure { margin: var(--tight-vert) 0; }
-
-/* Tighter container padding site-wide */
-.container, .content, .site-container { padding-left: 1rem; padding-right: 1rem; }
-
-/* Reduce common section gaps and grid gaps */
-section, .section, .content, [class*="-section"], [class$="-section"] { margin: 0.5rem 0; padding: 0; }
-
-/* Reduce grid/gap spacing for commonly used classes */
-.music-grid, .contact-content, .tracks-list, .track-list, .slideshow-section, .spotify-promo-section { gap: var(--tight-gap) !important; }
-
-/* Make utility: tight rows */
-.tight > * { margin-top: var(--tight-vert); margin-bottom: var(--tight-vert); }
-
-/* Reduce footer spacing */
-footer, app-footer { padding: 0.5rem 1rem !important; }
-
-/* Small adjustments for buttons/controls */
-.btn-listen, .btn-submit { padding: 0.5rem 0.75rem; font-size: 0.9rem; }
-
 
 // Font Awesome (if needed)
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
@@ -87,19 +61,19 @@ app-home {
     margin-bottom: 3rem;
 
     .slideshow-container {
-    position: relative;
-    width: 100%;
-    /* allow container to size to image height so tall images are fully visible */
-    max-height: none;
-    overflow: visible;
-    background: #000;
+      position: relative;
+      width: 100%;
+      max-height: 600px;
+      overflow: hidden;
+      background: #000;
 
       .slide-wrapper {
-      width: 100%;
-      position: relative;
-      /* let wrapper grow to image height */
-      overflow: visible;
-      background: #000000; /* ensure no page gradient shows through below images */
+        width: 100%;
+        position: relative;
+        overflow: hidden;
+        background: #000000; /* ensure no page gradient shows through below images */
+        /* increase default max height so desktop images appear larger */
+        max-height: clamp(450px, 70vh, 1000px);
 
         .slide-image {
           display: block;
@@ -111,8 +85,6 @@ app-home {
           object-fit: contain; /* show whole image */
           transform-origin: center;
           transition: transform 0.6s ease, opacity 0.5s ease;
-          /* ensure tall images are centered vertically within the slide wrapper */
-          margin: 0 auto;
         }
 
         .slide-overlay {
@@ -123,7 +95,6 @@ app-home {
         }
 
         @media (max-width: 768px) {
-          /* mobile keep a reasonable max so page doesn't grow too tall */
           max-height: clamp(220px, 38vh, 420px);
 
           .slide-image {
@@ -133,11 +104,6 @@ app-home {
             max-height: 100%;
           }
         }
-
-        /* center images vertically on desktop too so tall images are not clipped at the bottom */
-        display: flex;
-        align-items: center;
-        justify-content: center;
 
         @media (max-width: 480px) {
           max-height: clamp(180px, 32vh, 340px);
