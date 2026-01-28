@@ -13,18 +13,12 @@ import { CommonModule } from '@angular/common';
 export class Music implements OnInit {
   constructor(private content: ContentService) {}
 
-  // Single album
+  // album will be loaded from content.json at runtime; initialize empty to avoid stale hardcoded data
   album: any = {
-    id: 1,
-    title: 'TuWakiTuwa',
+    id: null,
+    title: '',
     image: '/squareImg/albumArt1.jpg',
-    "tracks": [
-        { "title": "Temple of the Eye", "spotify": "https://open.spotify.com/track/3rXClG16kCc4UNb14VxciL?si=mSoJPWHTT5Ov9AaAILHUFg", "description": "", "credits": "" },
-        { "title": "Giants of Shambala", "spotify": "https://open.spotify.com/track/4RnTDu87hZVLjSd2X6af1F?si=fcLEglDnToSZFvfGCeuMxg", "description": "", "credits": "" },
-        { "title": "Celestial Dancers", "spotify": "https://open.spotify.com/track/73q0NTZSP4o6lnRvsJhGoV?si=rNC6P1R0Rge7DCYuvOKEdQ", "description": "", "credits": "" },
-        { "title": "Sadhana", "spotify": "https://open.spotify.com/track/3hhrPavP2weEDNuJTtZHU3?si=VoBYINYOQGSr0mswHMX0wQ", "description": "", "credits": "" },
-        { "title": "Elysium", "spotify": "https://open.spotify.com/track/4adY0P4fchL9hKdbnOdT3J?si=JLrngo95TZ6auUr2fzAbaA", "description": "", "credits": "" }
-      ]
+    tracks: []
   };
 
   openTrackIndex: number | null = null;
