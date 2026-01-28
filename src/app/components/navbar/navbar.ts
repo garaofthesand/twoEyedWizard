@@ -16,8 +16,7 @@ export class Navbar {
   ];
 
   rightNavLinks = [
-    { label: 'APPEARANCES', path: '/appearances' },
-    { label: 'MERCH', path: '/merch' },
+    { label: 'MERCH', path: 'https://twoeyedwizard.bandcamp.com/album/tuwakituwa' },
     { label: 'CONTACT', path: '/contact' }
   ];
 

@@ -1,39 +1,28 @@
 <!-- =======================
      IMAGE SLIDESHOW
 ======================= -->
+<!-- Single-image slideshow for web and mobile; arrows shown only on desktop. Mobile uses swipe for navigation. -->
 <section class="slideshow-section">
   <div class="slideshow-container">
 
     <div class="slide-wrapper">
-      <picture *ngIf="slideImages.length">
-        <source media="(max-width: 768px)" [attr.srcset]="buildSrcset(slideImages[currentSlide]?.mobile, [480,800])" sizes="100vw" />
-        <source [attr.srcset]="buildSrcset(slideImages[currentSlide]?.pc, [1024,1600])" sizes="100vw" />
+      <div *ngIf="slideImages.length">
         <img
-          [src]="slideImages[currentSlide]?.pc"
-          [attr.srcset]="buildSrcset(slideImages[currentSlide]?.pc, [1024,1600])"
+          [src]="getCurrentImage()"
           class="slide-image"
           [alt]="'Slide ' + (currentSlide + 1)"
           loading="lazy"
         />
-      </picture>
+      </div>
       <div class="slide-overlay" aria-hidden="true"></div>
     </div>
 
-    <button class="slide-arrow prev-arrow" (click)="prevSlide()">
-      ‹
-    </button>
+    <button *ngIf="!isMobile" class="slide-arrow prev-arrow" (click)="prevSlide()">‹</button>
 
-    <button class="slide-arrow next-arrow" (click)="nextSlide()">
-      ›
-    </button>
+    <button *ngIf="!isMobile" class="slide-arrow next-arrow" (click)="nextSlide()">›</button>
 
     <div class="slide-indicators">
-      <span
-        *ngFor="let s of slideImages; let i = index"
-        class="indicator"
-        [class.active]="i === currentSlide"
-        (click)="currentSlide = i; resetSlideTimer()">
-      </span>
+      <span *ngFor="let s of slideImages; let i = index" class="indicator" [class.active]="i === currentSlide" (click)="currentSlide = i; resetSlideTimer()"></span>
     </div>
 
   </div>

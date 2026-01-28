@@ -59,7 +59,8 @@ export class ShopItem implements OnInit, AfterViewInit, OnDestroy {
     if (!base) return '';
     const idx = base.lastIndexOf('.');
     const baseNoExt = idx > -1 ? base.slice(0, idx) : base;
-    return ['480','800','1600'].map(w => `${baseNoExt.replace(/-480$/,'')}-${w}.svg ${w}w`).join(', ');
+    const ext = idx > -1 ? base.slice(idx + 1) : 'jpg';
+    return ['480','800','1600'].map(w => `${baseNoExt.replace(/-480$/,'')}-${w}.${ext} ${w}w`).join(', ');
   }
 
   nextSlide() {

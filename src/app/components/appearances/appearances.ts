@@ -16,7 +16,8 @@ export class Appearances implements OnInit {
     if (!base) return '';
     const idx = base.lastIndexOf('.');
     const baseNoExt = idx > -1 ? base.slice(0, idx) : base;
-    return widths.map((w) => `${baseNoExt}-${w}.svg ${w}w`).join(', ');
+    const ext = idx > -1 ? base.slice(idx + 1) : 'jpg';
+    return widths.map((w) => `${baseNoExt}-${w}.${ext} ${w}w`).join(', ');
   }
 
   appearances = [

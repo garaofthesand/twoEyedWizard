@@ -1,36 +1,18 @@
 <div class="music-page">
 	<div class="container">
-		<!-- Optional header image: set `headerImage` in the component to show -->
-		<div class="top-image" *ngIf="headerImage">
-			<img [src]="headerImage" alt="header" />
-		</div>
 		<div class="music-grid">
 			<div class="left-column">
 				<div class="album-art">
-					<button class="arrow prev" (click)="prevAlbum()">&#10094;</button>
-
 					<div class="art-frame">
-						<img
-						  [attr.srcset]="buildSrcset(albums[currentAlbum].image, [480,800,1600])"
-						  sizes="(max-width:768px)80vw, 300px"
-						  [src]="albums[currentAlbum].image"
-						  [alt]="albums[currentAlbum].title"
-						  loading="lazy"
-						/>
-					</div>
-
-					<button class="arrow next" (click)="nextAlbum()">&#10095;</button>
-
-					<div class="dots">
-						<span *ngFor="let a of albums; let i = index" (click)="selectAlbum(i)" [class.active]="i === currentAlbum"></span>
+						<img [src]="album.image" [alt]="album.title" loading="lazy" />
 					</div>
 				</div>
 			</div>
 
 			<div class="right-column">
 				<div class="tracks-list">
-					<h2 class="album-title">{{ albums[currentAlbum].title }}</h2>
-					<div *ngFor="let t of albums[currentAlbum].tracks" class="track-item">
+					<h2 class="album-title">{{ album.title }}</h2>
+					<div *ngFor="let t of album.tracks" class="track-item">
 						<div class="track-info">
 							<h3 class="track-title">{{ t.title }}</h3>
 						</div>

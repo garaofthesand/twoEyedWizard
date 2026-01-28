@@ -40,26 +40,15 @@
     "listen": "LISTEN ON SPOTIFY"
   }
   ,"music": {
-    "headerImage": "/tuwakituwa.png",
-    "albums": [
-      {
-        "id": 1,
-        "title": "TuWakiTuwa",
-        "image": "/squareImg/home1.jpg",
-        "tracks": [
-          { "title": "TuWakiTuwa (Original)", "spotify": "https://open.spotify.com/track/7qiZfU4dY1lsylvNEprXGy" },
-          { "title": "Midnight Beat", "spotify": "https://open.spotify.com/track/0VjIjW4GlUZAMYd2vXMi3b" }
-        ]
-      },
-      {
-        "id": 2,
-        "title": "Echoes & Neon",
-        "image": "/squareImg/home2.jpg",
-        "tracks": [
-          { "title": "Echoes", "spotify": "https://open.spotify.com/track/7yO4IdJjCEPz7YgZMe25iS" }
-        ]
-      }
-    ]
+    "album": {
+      "id": 1,
+      "title": "TuWakiTuwa",
+      "image": "/squareImg/albumArt1.jpg",
+      "tracks": [
+        { "title": "TuWakiTuwa (Original)", "spotify": "https://open.spotify.com/track/7qiZfU4dY1lsylvNEprXGy" },
+        { "title": "Midnight Beat", "spotify": "https://open.spotify.com/track/0VjIjW4GlUZAMYd2vXMi3b" }
+      ]
+    }
   },
   "appearances": [
     {
@@ -84,7 +73,7 @@
     "defaults": {
       "name": "",
       "email": "",
-      "subject": "Booking inquiry",
+      "subject": "",
       "message": ""
     }
   }
@@ -95,10 +84,8 @@
       "description": "Handcrafted bamboo didgeridoo. Natural finish, warm tone.",
       "contact": "orders@example.com",
       "images": [
-        "/merch/bamboo-1-480.svg",
-        "/merch/bamboo-2-480.svg",
-        "/merch/bamboo-3-480.svg",
-        "/merch/bamboo-4-480.svg"
+          "/squareImg/home1.jpg",
+          "/squareImg/albumArt1.jpg"
       ]
     },
     {
@@ -107,10 +94,8 @@
       "description": "Seasoned hardwood didgeridoo with lacquered finish.",
       "contact": "orders@example.com",
       "images": [
-        "/merch/wood-1-480.svg",
-        "/merch/wood-2-480.svg",
-        "/merch/wood-3-480.svg",
-        "/merch/wood-4-480.svg"
+          "/squareImg/home2.jpg",
+          "/squareImg/albumArt2.jpg"
       ]
     },
     {
@@ -119,10 +104,8 @@
       "description": "Agave-based instrument, lightweight and resonant.",
       "contact": "orders@example.com",
       "images": [
-        "/merch/agave-1-480.svg",
-        "/merch/agave-2-480.svg",
-        "/merch/agave-3-480.svg",
-        "/merch/agave-4-480.svg"
+          "/squareImg/albumArt1.jpg",
+          "/squareImg/home1.jpg"
       ]
     },
     {
@@ -131,10 +114,8 @@
       "description": "Hybrid construction combining woods and modern materials.",
       "contact": "orders@example.com",
       "images": [
-        "/merch/hybrid-1-480.svg",
-        "/merch/hybrid-2-480.svg",
-        "/merch/hybrid-3-480.svg",
-        "/merch/hybrid-4-480.svg"
+          "/squareImg/albumArt2.jpg",
+          "/squareImg/home2.jpg"
       ]
     }
   ]

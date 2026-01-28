@@ -61,19 +61,19 @@ app-home {
     margin-bottom: 3rem;
 
     .slideshow-container {
-      position: relative;
-      width: 100%;
-      max-height: 600px;
-      overflow: hidden;
-      background: #000;
+    position: relative;
+    width: 100%;
+    /* allow container to size to image height so tall images are fully visible */
+    max-height: none;
+    overflow: visible;
+    background: #000;
 
       .slide-wrapper {
-        width: 100%;
-        position: relative;
-        overflow: hidden;
-        background: #000000; /* ensure no page gradient shows through below images */
-        /* increase default max height so desktop images appear larger */
-        max-height: clamp(450px, 70vh, 1000px);
+      width: 100%;
+      position: relative;
+      /* let wrapper grow to image height */
+      overflow: visible;
+      background: #000000; /* ensure no page gradient shows through below images */
 
         .slide-image {
           display: block;
@@ -85,6 +85,8 @@ app-home {
           object-fit: contain; /* show whole image */
           transform-origin: center;
           transition: transform 0.6s ease, opacity 0.5s ease;
+          /* ensure tall images are centered vertically within the slide wrapper */
+          margin: 0 auto;
         }
 
         .slide-overlay {
@@ -95,6 +97,7 @@ app-home {
         }
 
         @media (max-width: 768px) {
+          /* mobile keep a reasonable max so page doesn't grow too tall */
           max-height: clamp(220px, 38vh, 420px);
 
           .slide-image {
@@ -104,6 +107,11 @@ app-home {
             max-height: 100%;
           }
         }
+
+        /* center images vertically on desktop too so tall images are not clipped at the bottom */
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
         @media (max-width: 480px) {
           max-height: clamp(180px, 32vh, 340px);
@@ -435,13 +443,21 @@ app-home {
 }
 
 .slide-wrapper .slide-image {
-  width: 100% !important;
+  /* On desktop: keep image aspect, don't force width 100% which may cause vertical overflow
+     instead let the image size by height so it fits within the container without being cropped */
+  width: auto !important;
   height: auto !important;
-  object-fit: cover !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  object-fit: contain !important;
 }
 
 @media (max-width: 768px) {
+  /* On mobile allow images to fill width while maintaining aspect */
   .slide-wrapper .slide-image {
+    width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
     object-fit: contain !important;
   }
 }

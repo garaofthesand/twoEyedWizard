@@ -1,5 +1,4 @@
-import { Component, OnInit, OnDestroy, AfterViewInit, NgZone } from '@angular/core';
-import { attachSwipe } from '../../utils/swipe';
+import { Component, OnInit } from '@angular/core';
 import { ContentService } from '../../services/content.service';
 import { first } from 'rxjs/operators';
 import { CommonModule } from '@angular/common';
@@ -11,137 +10,63 @@ import { CommonModule } from '@angular/common';
   templateUrl: './music.html',
   styleUrl: './music.scss',
 })
-export class Music implements OnInit, OnDestroy, AfterViewInit {
-  constructor(private ngZone: NgZone, private content: ContentService) {}
-  // optional top/header image
-  headerImage = '/tuwakituwa.png';
+export class Music implements OnInit {
+  constructor(private content: ContentService) {}
 
-  // Albums: each album has an image and its own tracks
-  albums = [
-    {
-      id: 1,
-      title: 'TuWakiTuwa',
-      image: '/squareImg/home1.jpg',
-      tracks: [
-        { title: 'TuWakiTuwa (Original)', spotify: 'https://open.spotify.com/track/7qiZfU4dY1lsylvNEprXGy' },
-        { title: 'Midnight Beat', spotify: 'https://open.spotify.com/track/0VjIjW4GlUZAMYd2vXMi3b' }
-      ]
-    },
-    {
-      id: 2,
-      title: 'Echoes & Neon',
-      image: '/squareImg/home2.jpg',
-      tracks: [
-        { title: 'Echoes', spotify: 'https://open.spotify.com/track/7yO4IdJjCEPz7YgZMe25iS' },
-        { title: 'Neon Sky', spotify: 'https://open.spotify.com/track/0VjIjW4GlUZAMYd2vXMi3b' }
-      ]
-    },
-    {
-      id: 3,
-      title: 'Midnight Lull',
-      image: '/squareImg/home1.jpg',
-      tracks: [
-        { title: 'Lullaby (Interlude)', spotify: 'https://open.spotify.com/track/7qiZfU4dY1lsylvNEprXGy' }
-      ]
-    }
-  ];
-
-  currentAlbum = 0;
-  albumTimer: any = null;
-  isMobile = false;
-  private albumDetach: (() => void) | undefined;
-  // stable resize handler
-  resizeHandler = () => this.handleResize();
+  // Single album
+  album: any = {
+    id: 1,
+    title: 'TuWakiTuwa',
+    image: '/squareImg/albumArt1.jpg',
+    tracks: [
+      { title: 'TuWakiTuwa (Original)', spotify: 'https://open.spotify.com/track/7qiZfU4dY1lsylvNEprXGy' },
+      { title: 'Midnight Beat', spotify: 'https://open.spotify.com/track/0VjIjW4GlUZAMYd2vXMi3b' }
+    ]
+  };
 
   ngOnInit(): void {
-    this.checkMobile();
-    window.addEventListener('resize', this.resizeHandler);
-    this.startAlbums();
-    // load albums/header from content.json if provided
+    // load single album from content.json if provided
     try {
       this.content.get('music').pipe(first()).subscribe((m: any) => {
         if (!m) return;
-        if (Array.isArray(m.albums)) this.albums = m.albums;
-        else if (Array.isArray(m)) this.albums = m;
-        if (m.headerImage) this.headerImage = m.headerImage;
+        if (m.album) this.album = m.album;
+        else if (m) this.album = m;
       });
     } catch (err) {
       // ignore
     }
   }
 
-  ngOnDestroy(): void {
-    this.stopAlbums();
-    window.removeEventListener('resize', this.resizeHandler);
-    if (this.albumDetach) this.albumDetach();
-  }
-
-  ngAfterViewInit(): void {
-    this.updateAlbumSwipe();
-  }
-
-  checkMobile() {
-    this.isMobile = window.innerWidth <= 768;
-  }
-
-  handleResize() {
-    const was = this.isMobile;
-    this.checkMobile();
-    if (was !== this.isMobile) this.updateAlbumSwipe();
-  }
-
-  updateAlbumSwipe() {
-    try {
-      const el = document.querySelector('.album-art') as HTMLElement;
-      if (this.isMobile) {
-        if (el && !this.albumDetach) {
-          this.albumDetach = attachSwipe(el, (dir: 'left' | 'right') => {
-            this.ngZone.run(() => {
-              if (dir === 'left') this.nextAlbum();
-              else this.prevAlbum();
-            });
-          });
-        }
-      } else {
-        if (this.albumDetach) {
-          this.albumDetach();
-          this.albumDetach = undefined;
-        }
-      }
-    } catch (err) {
-      // ignore
-    }
-  }
-
-  startAlbums() {
-    this.stopAlbums();
-    this.albumTimer = setInterval(() => this.nextAlbum(), 4000);
-  }
-
-  stopAlbums() {
-    if (this.albumTimer) {
-      clearInterval(this.albumTimer);
-      this.albumTimer = null;
-    }
-  }
-
-  nextAlbum() {
-    this.currentAlbum = (this.currentAlbum + 1) % this.albums.length;
-  }
-
-  prevAlbum() {
-    this.currentAlbum = (this.currentAlbum - 1 + this.albums.length) % this.albums.length;
-  }
-
-  selectAlbum(i: number) {
-    this.currentAlbum = i;
-    this.startAlbums();
-  }
+  // no carousel needed for single album
 
   buildSrcset(base?: string, widths: number[] = [480, 800, 1600]): string {
     if (!base) return '';
     const idx = base.lastIndexOf('.');
     const baseNoExt = idx > -1 ? base.slice(0, idx) : base;
-    return widths.map((w) => `${baseNoExt}-${w}.svg ${w}w`).join(', ');
+    const ext = idx > -1 ? base.slice(idx + 1) : 'jpg';
+    return widths.map((w) => `${baseNoExt}-${w}.${ext} ${w}w`).join(', ');
+  }
+
+  // Desktop slider scroll helpers for albums
+  scrollAlbumsNext() {
+    try {
+      const track = document.querySelector('.albums-track') as HTMLElement;
+      if (!track) return;
+      const w = track.clientWidth || window.innerWidth;
+      track.scrollBy({ left: Math.floor(w * 0.8), behavior: 'smooth' });
+    } catch (e) {
+      // ignore
+    }
+  }
+
+  scrollAlbumsPrev() {
+    try {
+      const track = document.querySelector('.albums-track') as HTMLElement;
+      if (!track) return;
+      const w = track.clientWidth || window.innerWidth;
+      track.scrollBy({ left: -Math.floor(w * 0.8), behavior: 'smooth' });
+    } catch (e) {
+      // ignore
+    }
   }
 }

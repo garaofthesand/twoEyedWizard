@@ -126,6 +126,29 @@ export class Home implements OnInit, OnDestroy, AfterViewInit {
     this.isMobile = window.innerWidth <= 768;
   }
 
+  // Desktop slider scroll helpers (scrolls the slide track by visible width)
+  scrollDesktopNext() {
+    try {
+      const track = document.querySelector('.desktop-slider .slides-track') as HTMLElement;
+      if (!track) return;
+      const w = track.clientWidth || window.innerWidth;
+      track.scrollBy({ left: Math.floor(w * 0.8), behavior: 'smooth' });
+    } catch (e) {
+      // ignore
+    }
+  }
+
+  scrollDesktopPrev() {
+    try {
+      const track = document.querySelector('.desktop-slider .slides-track') as HTMLElement;
+      if (!track) return;
+      const w = track.clientWidth || window.innerWidth;
+      track.scrollBy({ left: -Math.floor(w * 0.8), behavior: 'smooth' });
+    } catch (e) {
+      // ignore
+    }
+  }
+
   getCurrentImage() {
     return this.isMobile
       ? this.slideImages[this.currentSlide].mobile
@@ -137,7 +160,8 @@ export class Home implements OnInit, OnDestroy, AfterViewInit {
     if (!base) return '';
     const idx = base.lastIndexOf('.');
     const baseNoExt = idx > -1 ? base.slice(0, idx) : base;
-    return widths.map((w) => `${baseNoExt}-${w}.svg ${w}w`).join(', ');
+    const ext = idx > -1 ? base.slice(idx + 1) : 'jpg';
+    return widths.map((w) => `${baseNoExt}-${w}.${ext} ${w}w`).join(', ');
   }
 
   nextSlide() {
