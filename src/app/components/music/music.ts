@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './music.html',
-  styleUrl: './music.scss',
+  styleUrls: ['./music.scss'],
 })
 export class Music implements OnInit {
   constructor(private content: ContentService) {}

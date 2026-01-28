@@ -24,7 +24,11 @@
 						</div>
 						<div class="track-credits" *ngIf="isDetailsOpen(i)">
 							<div class="description" *ngIf="t.description && t.description.length">{{ t.description }}</div>
-							<div class="credits" *ngIf="t.credits && t.credits.length">{{ t.credits }}</div>
+							<div class="credits" *ngIf="t.credits && t.credits.length">
+								<ul class="credits-list">
+									<li *ngFor="let c of t.credits">{{ c }}</li>
+								</ul>
+							</div>
 							<div class="none" *ngIf="!(t.description && t.description.length) && !(t.credits && t.credits.length)">No credits available</div>
 						</div>
 					</div>
