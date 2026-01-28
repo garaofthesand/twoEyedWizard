@@ -29,6 +29,32 @@ html, body {
   color: #ffffff;
 }
 
+/* Tight layout overrides: reduce default spacing across site */
+:root { --tight-gap: 0.5rem; --tight-vert: 0.25rem; }
+
+/* Reduce default heading and paragraph spacing */
+h1,h2,h3,h4,h5,h6 { margin: var(--tight-vert) 0; padding: 0; }
+p, ul, ol, dl, figure { margin: var(--tight-vert) 0; }
+
+/* Tighter container padding site-wide */
+.container, .content, .site-container { padding-left: 1rem; padding-right: 1rem; }
+
+/* Reduce common section gaps and grid gaps */
+section, .section, .content, [class*="-section"], [class$="-section"] { margin: 0.5rem 0; padding: 0; }
+
+/* Reduce grid/gap spacing for commonly used classes */
+.music-grid, .contact-content, .tracks-list, .track-list, .slideshow-section, .spotify-promo-section { gap: var(--tight-gap) !important; }
+
+/* Make utility: tight rows */
+.tight > * { margin-top: var(--tight-vert); margin-bottom: var(--tight-vert); }
+
+/* Reduce footer spacing */
+footer, app-footer { padding: 0.5rem 1rem !important; }
+
+/* Small adjustments for buttons/controls */
+.btn-listen, .btn-submit { padding: 0.5rem 0.75rem; font-size: 0.9rem; }
+
+
 // Font Awesome (if needed)
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
 

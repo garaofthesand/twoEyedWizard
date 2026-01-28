@@ -13,14 +13,15 @@
       <ul class="nav-list">
         <li *ngFor="let link of navLinks" class="nav-item">
           <ng-container *ngIf="link.path && link.path.indexOf('http') === 0; else routerLinkTpl">
-            <a [href]="link.path" target="_blank" rel="noopener" class="nav-link">{{ link.label }}</a>
+            <a [href]="link.path" target="_blank" rel="noopener" class="nav-link" (click)="closeMenu()">{{ link.label }}</a>
           </ng-container>
           <ng-template #routerLinkTpl>
             <a
               [routerLink]="link.path"
               routerLinkActive="active"
               [routerLinkActiveOptions]="{ exact: true }"
-              class="nav-link">
+              class="nav-link"
+              (click)="closeMenu()">
               {{ link.label }}
             </a>
           </ng-template>
