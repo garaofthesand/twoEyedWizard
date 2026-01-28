@@ -7,7 +7,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
+
 
 /* Make images and media scale responsively by default */
 img,
@@ -107,7 +107,6 @@ app-home {
             max-height: none;
           }
         }
-      }
 
       /* Mobile: show whole image (no crop) and center it */
       @media (max-width: 768px) {
