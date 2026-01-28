@@ -193,12 +193,12 @@ export class Home implements OnInit, OnDestroy, AfterViewInit {
     {
       embedId: '4RnTDu87hZVLjSd2X6af1F',
       spotifyLink: 'https://open.spotify.com/track/4RnTDu87hZVLjSd2X6af1F',
-      image: '/squareImg/home1.jpg'
+      image: '/squareImg/albumArt1.jpg'
     },
     {
       embedId: '3hhrPavP2weEDNuJTtZHU3',
       spotifyLink: 'https://open.spotify.com/track/3hhrPavP2weEDNuJTtZHU3',
-      image: '/squareImg/home1.jpg'
+      image: '/squareImg/albumArt1.jpg'
     }
   ];
 

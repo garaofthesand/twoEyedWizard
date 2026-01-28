@@ -242,7 +242,7 @@ app-home {
       gap: 2rem;
 
       /* enforce black background through the promo area */
-      background: #000000 !important;
+      background: #030303 !important;
       box-shadow: none !important;
 
       @media (max-width: 768px) {
@@ -427,7 +427,7 @@ app-home {
 .slideshow-section,
 .slideshow-container,
 .slide-wrapper {
-  background: #000 !important;
+  background: #030303 !important;
 }
 
 .slideshow-container {
@@ -452,4 +452,7 @@ app-home {
     max-height: none !important;
     object-fit: contain !important;
   }
+  /* Reduce vertical gaps between slideshow and spotify promo on mobile */
+  .slideshow-section { margin-bottom: 0.5rem !important; }
+  .spotify-promo-section { margin: 0.5rem 0 !important; padding: 0.75rem 0 !important; }
 }
