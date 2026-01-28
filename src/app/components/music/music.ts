@@ -18,11 +18,16 @@ export class Music implements OnInit {
     id: 1,
     title: 'TuWakiTuwa',
     image: '/squareImg/albumArt1.jpg',
-    tracks: [
-      { title: 'TuWakiTuwa (Original)', spotify: 'https://open.spotify.com/track/7qiZfU4dY1lsylvNEprXGy' },
-      { title: 'Midnight Beat', spotify: 'https://open.spotify.com/track/0VjIjW4GlUZAMYd2vXMi3b' }
-    ]
+    "tracks": [
+        { "title": "Temple of the Eye", "spotify": "https://open.spotify.com/track/3rXClG16kCc4UNb14VxciL?si=mSoJPWHTT5Ov9AaAILHUFg", "description": "", "credits": "" },
+        { "title": "Giants of Shambala", "spotify": "https://open.spotify.com/track/4RnTDu87hZVLjSd2X6af1F?si=fcLEglDnToSZFvfGCeuMxg", "description": "", "credits": "" },
+        { "title": "Celestial Dancers", "spotify": "https://open.spotify.com/track/73q0NTZSP4o6lnRvsJhGoV?si=rNC6P1R0Rge7DCYuvOKEdQ", "description": "", "credits": "" },
+        { "title": "Sadhana", "spotify": "https://open.spotify.com/track/3hhrPavP2weEDNuJTtZHU3?si=VoBYINYOQGSr0mswHMX0wQ", "description": "", "credits": "" },
+        { "title": "Elysium", "spotify": "https://open.spotify.com/track/4adY0P4fchL9hKdbnOdT3J?si=JLrngo95TZ6auUr2fzAbaA", "description": "", "credits": "" }
+      ]
   };
+
+  openTrackIndex: number | null = null;
 
   ngOnInit(): void {
     // load single album from content.json if provided
@@ -35,6 +40,14 @@ export class Music implements OnInit {
     } catch (err) {
       // ignore
     }
+    }
+
+  toggleDetails(i: number) {
+    this.openTrackIndex = this.openTrackIndex === i ? null : i;
+  }
+
+  isDetailsOpen(i: number) {
+    return this.openTrackIndex === i;
   }
 
   // no carousel needed for single album

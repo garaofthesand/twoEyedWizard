@@ -32,8 +32,11 @@
   "footer": {
     "followTitle": "Follow Us",
     "socialLinks": [
-      { "label": "Twitter", "url": "https://twitter.com", "icon": "fab fa-twitter" },
-      { "label": "Instagram", "url": "https://instagram.com", "icon": "fab fa-instagram" }
+      { "label": "Facebook", "url": "https://www.facebook.com/twoeyedwizard/", "icon": "fab fa-facebook" },
+      { "label": "Instagram", "url": "https://www.instagram.com/twoeyedwizard/", "icon": "fab fa-instagram" },
+      { "label": "YouTube", "url": "https://www.youtube.com/channel/UCj5M0csWD2UVurd8SjHVEOQ", "icon": "fab fa-youtube" },
+      { "label": "Apple Music", "url": "https://music.apple.com/in/artist/two-eyed-wizard/1679219991", "icon": "fab fa-apple" },
+      { "label": "Spotify", "url": "https://open.spotify.com/artist/3QGNCybOCnUBbnJwbZlcWL?si=FMi-s0T0SL21eOH19LNHSg", "icon": "fab fa-spotify" }
     ]
   },
   "buttons": {
@@ -45,11 +48,11 @@
       "title": "TuWakiTuwa",
       "image": "/squareImg/albumArt1.jpg",
       "tracks": [
-        { "title": "Temple of the Eye", "spotify": "https://open.spotify.com/track/3rXClG16kCc4UNb14VxciL?si=mSoJPWHTT5Ov9AaAILHUFg" },
-        { "title": "Giants of Shambala", "spotify": "https://open.spotify.com/track/4RnTDu87hZVLjSd2X6af1F?si=fcLEglDnToSZFvfGCeuMxg" },
-        { "title": "Celestial Dancers", "spotify": "https://open.spotify.com/track/73q0NTZSP4o6lnRvsJhGoV?si=rNC6P1R0Rge7DCYuvOKEdQ" },
-        { "title": "Sadhana", "spotify": "https://open.spotify.com/track/3hhrPavP2weEDNuJTtZHU3?si=VoBYINYOQGSr0mswHMX0wQ" },
-         { "title": "Elysium", "spotify": "https://open.spotify.com/track/4adY0P4fchL9hKdbnOdT3J?si=JLrngo95TZ6auUr2fzAbaA" }
+        { "title": "Temple of the Eye", "spotify": "https://open.spotify.com/track/3rXClG16kCc4UNb14VxciL?si=mSoJPWHTT5Ov9AaAILHUFg", "description": "A meditative opener built from layered didgeridoo drones and field recordings.", "credits": "Written & performed by Two Eyed Wizard. Recorded by A. Engineer. Mixed by B. Mixer. Mastered by C. Mastering." },
+        { "title": "Giants of Shambala", "spotify": "https://open.spotify.com/track/4RnTDu87hZVLjSd2X6af1F?si=fcLEglDnToSZFvfGCeuMxg", "description": "An expansive rhythm piece blending traditional percussion with modern electronic textures.", "credits": "Composed by Two Eyed Wizard. Percussion: D. Drummer. Additional synths by E. Synth." },
+        { "title": "Celestial Dancers", "spotify": "https://open.spotify.com/track/73q0NTZSP4o6lnRvsJhGoV?si=rNC6P1R0Rge7DCYuvOKEdQ", "description": "Airy melodies and shifting polyrhythms inspired by ritual dance.", "credits": "Written & arranged by Two Eyed Wizard. Flute by F. Flutist. Engineering by A. Engineer." },
+        { "title": "Sadhana", "spotify": "https://open.spotify.com/track/3hhrPavP2weEDNuJTtZHU3?si=VoBYINYOQGSr0mswHMX0wQ", "description": "A contemplative track centered on cyclic patterns and tabla grooves.", "credits": "Composed by Two Eyed Wizard. Tabla: G. TablaPlayer. Mixed by B. Mixer." },
+        { "title": "Elysium", "spotify": "https://open.spotify.com/track/4adY0P4fchL9hKdbnOdT3J?si=JLrngo95TZ6auUr2fzAbaA", "description": "Closing piece with lush harmonics and ambient washes.", "credits": "Written & produced by Two Eyed Wizard. Guest vocals by H. Vocalist. Mastered by C. Mastering." }
       ]
     }
   },

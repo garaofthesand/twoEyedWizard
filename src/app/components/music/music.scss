@@ -75,13 +75,50 @@ $text: #ffffff;
 
       .track-item {
         display:flex;
-        align-items:center;
-        justify-content:space-between;
+        flex-direction:column;
+        align-items:stretch;
         padding:0.6rem 0.8rem;
         border-radius:6px;
         background:transparent;
         border:1px solid #111111;
 
+
+      .track-title { cursor: pointer; }
+
+      .track-credits {
+        margin-top: 0.5rem;
+        color: rgba(255,255,255,0.85);
+        font-size: 0.95rem;
+        line-height: 1.4;
+        padding-left: 0.25rem;
+      }
+      
+      .track-row {
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        gap: 1rem;
+      }
+
+      .track-controls {
+        display:flex;
+        align-items:center;
+        gap:0.6rem;
+      }
+
+      .info-btn {
+        width:28px;
+        height:28px;
+        border-radius:50%;
+        border:1px solid rgba(255,255,255,0.15);
+        background: transparent;
+        color: #ffffff;
+        display:inline-flex;
+        align-items:center;
+        justify-content:center;
+        font-weight:700;
+        cursor:pointer;
+      }
         .track-info {
           .track-title { margin:0; font-weight:700; color:#ffffff; }
           .track-sub { margin:0; color:#dddddd; font-size:0.9rem; }
@@ -105,4 +142,3 @@ $text: #ffffff;
   .music-page .music-grid { grid-template-columns: 1fr; }
   .music-page .left-column .art-frame { height:260px; }
 }
-

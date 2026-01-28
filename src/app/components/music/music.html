@@ -12,12 +12,20 @@
 			<div class="right-column">
 				<div class="tracks-list">
 					<h2 class="album-title">{{ album.title }}</h2>
-					<div *ngFor="let t of album.tracks" class="track-item">
-						<div class="track-info">
-							<h3 class="track-title">{{ t.title }}</h3>
+					<div *ngFor="let t of album.tracks; let i = index" class="track-item">
+						<div class="track-row">
+							<div class="track-info">
+								<h3 class="track-title">{{ t.title }}</h3>
+							</div>
+							<div class="track-controls">
+								<button type="button" class="info-btn" (click)="toggleDetails(i)" [attr.aria-expanded]="isDetailsOpen(i)" aria-label="Show credits">i</button>
+								<a [href]="t.spotify" target="_blank" rel="noopener" class="btn-listen">Listen</a>
+							</div>
 						</div>
-						<div class="track-action">
-							<a [href]="t.spotify" target="_blank" rel="noopener" class="btn-listen">Listen</a>
+						<div class="track-credits" *ngIf="isDetailsOpen(i)">
+							<div class="description" *ngIf="t.description && t.description.length">{{ t.description }}</div>
+							<div class="credits" *ngIf="t.credits && t.credits.length">{{ t.credits }}</div>
+							<div class="none" *ngIf="!(t.description && t.description.length) && !(t.credits && t.credits.length)">No credits available</div>
 						</div>
 					</div>
 				</div>

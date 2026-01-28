@@ -20,9 +20,10 @@ export class Footer {
   ];
 
   socialLinks = [
-    { label: 'YouTube', icon: 'fab fa-youtube', url: 'https://youtube.com' },
-    { label: 'Spotify', icon: 'fab fa-spotify', url: 'https://spotify.com' },
-    { label: 'Twitter', icon: 'fab fa-twitter', url: 'https://twitter.com' },
-    { label: 'Instagram', icon: 'fab fa-instagram', url: 'https://instagram.com' }
+    { label: 'YouTube', icon: 'fab fa-youtube', url: 'https://www.youtube.com/channel/UCj5M0csWD2UVurd8SjHVEOQ' },
+    { label: 'Facebook', icon: 'fab fa-facebook', url: 'https://www.facebook.com/twoeyedwizard/' },
+    { label: 'Spotify', icon: 'fab fa-spotify', url: 'https://open.spotify.com/artist/3QGNCybOCnUBbnJwbZlcWL?si=FMi-s0T0SL21eOH19LNHSg' },
+    { label: 'Apple Music', icon: 'fab fa-apple', url: 'https://music.apple.com/in/artist/two-eyed-wizard/1679219991' },
+    { label: 'Instagram', icon: 'fab fa-instagram', url: 'https://www.instagram.com/twoeyedwizard/' }
   ];
 }
